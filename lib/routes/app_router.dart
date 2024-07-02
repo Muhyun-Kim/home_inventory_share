@@ -1,17 +1,23 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_inventory_share/providers/auth_provider.dart';
 import 'package:home_inventory_share/views/create_account/create_account_page.dart';
 import 'package:home_inventory_share/views/home/home_page.dart';
 import 'package:home_inventory_share/views/login/login_page.dart';
-import 'package:home_inventory_share/views/root/root_page.dart';
 
 final routerProvider = Provider<GoRouter>(
   (ref) {
+    final authState = ref.watch(authStateProvider);
+
     return GoRouter(
       routes: [
         GoRoute(
           path: '/',
-          builder: (context, state) => const RootPage(),
+          builder: (context, state) {
+            return authState.isAuthenticated
+                ? const HomePage()
+                : const LoginPage();
+          },
         ),
         GoRoute(
           path: '/login',

@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:home_inventory_share/controllers/auth_controller.dart';
 
 class CreateAccountPage extends ConsumerStatefulWidget {
   const CreateAccountPage({super.key});
@@ -69,19 +69,21 @@ class _CreateAccountPageState extends ConsumerState<CreateAccountPage> {
 
   Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
+      final authController = ref.read(authControllerProvider);
       try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        authController.createAccountWithEmail(
           email: _emailController.text,
           password: _passwordController.text,
+          username: _usernameController.text,
         );
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('アカウントを作成しました'),
           ),
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('アカウントの作成に失敗しました'),
           ),
         );
@@ -93,10 +95,10 @@ class _CreateAccountPageState extends ConsumerState<CreateAccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Account Page'),
+        title: const Text('Create Account Page'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.00),
+        padding: const EdgeInsets.all(16.00),
         child: Form(
           key: _formKey,
           child: Column(
@@ -104,21 +106,21 @@ class _CreateAccountPageState extends ConsumerState<CreateAccountPage> {
             children: [
               TextFormField(
                 controller: _usernameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'ユーザー名',
                 ),
                 validator: _usernameValidator,
               ),
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'メールアドレス',
                 ),
                 validator: _emailValidator,
               ),
               TextFormField(
                 controller: _passwordController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'パスワード',
                 ),
                 validator: _passwordValidator,
@@ -126,7 +128,7 @@ class _CreateAccountPageState extends ConsumerState<CreateAccountPage> {
               ),
               TextFormField(
                 controller: _confirmPasswordController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'パスワード確認',
                 ),
                 validator: _passwordConfirmValidator,
@@ -135,13 +137,13 @@ class _CreateAccountPageState extends ConsumerState<CreateAccountPage> {
               const SizedBox(height: 16.00),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: Text(
+                child: const Text(
                   'アカウント作成',
                 ),
               ),
               ElevatedButton(
                 onPressed: () => context.go('/login'),
-                child: Text('ログイン'),
+                child: const Text('ログイン'),
               ),
             ],
           ),
