@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:home_inventory_share/providers/auth_provider.dart';
 import 'package:home_inventory_share/views/create_account/create_account_page.dart';
 import 'package:home_inventory_share/views/home/home_page.dart';
+import 'package:home_inventory_share/views/inventory/create_inventory/create_inventory_page.dart';
 import 'package:home_inventory_share/views/login/login_page.dart';
 
 final routerProvider = Provider<GoRouter>(
@@ -30,6 +31,10 @@ final routerProvider = Provider<GoRouter>(
         GoRoute(
           path: '/home',
           builder: (context, state) => const HomePage(),
+        ),
+        GoRoute(
+          path: '/inventory/create',
+          builder: (context, state) => const CreateInventoryPage(),
         ),
       ],
     );
