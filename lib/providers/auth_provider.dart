@@ -20,7 +20,8 @@ final authStateProvider =
 class AuthStateNotifier extends StateNotifier<AuthState> {
   final Ref _ref;
 
-  AuthStateNotifier(this._ref) : super(AuthState(isAuthenticated: false)) {
+  AuthStateNotifier(this._ref)
+      : super(const AuthState(isAuthenticated: false)) {
     _checkAuthState();
   }
 
@@ -83,6 +84,6 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
 
   Future<void> signOut() async {
     await _ref.read(firebaseAuthProvider).signOut();
-    state = AuthState(isAuthenticated: false);
+    state = const AuthState(isAuthenticated: false);
   }
 }

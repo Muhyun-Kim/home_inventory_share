@@ -41,6 +41,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           email: _emailController.text,
           password: _passwordController.text,
         );
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('ログインしました'),
@@ -60,10 +61,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: const Text('Login Page'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.00),
+        padding: const EdgeInsets.all(16.00),
         child: Form(
           key: _formKey,
           child: Column(
@@ -71,25 +72,25 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             children: [
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'メールアドレス',
                 ),
                 validator: _emailValidator,
               ),
               TextFormField(
                 controller: _passwordController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'パスワード',
                 ),
               ),
               const SizedBox(height: 16.00),
               ElevatedButton(
                 onPressed: _submitForm,
-                child: Text('ログイン'),
+                child: const Text('ログイン'),
               ),
               ElevatedButton(
                 onPressed: () => context.go('/create-account'),
-                child: Text('アカウント作成'),
+                child: const Text('アカウント作成'),
               ),
             ],
           ),

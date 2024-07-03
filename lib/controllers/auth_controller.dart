@@ -24,6 +24,10 @@ class AuthController {
         .read(authStateProvider.notifier)
         .signInWithEmailAndPassword(email, password);
   }
+
+  Future<void> logout() async {
+    await _ref.read(authStateProvider.notifier).signOut();
+  }
 }
 
 final authControllerProvider = Provider((ref) {
