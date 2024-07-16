@@ -3,14 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:home_inventory_share/models/auth_state.dart';
 import 'package:home_inventory_share/models/user_model.dart';
-
-final firebaseAuthProvider = Provider<FirebaseAuth>((ref) {
-  return FirebaseAuth.instance;
-});
-
-final firestoreProvider = Provider<FirebaseFirestore>((ref) {
-  return FirebaseFirestore.instance;
-});
+import 'package:home_inventory_share/providers/firebase_provider.dart';
 
 final authStateProvider =
     StateNotifierProvider<AuthStateNotifier, AuthState>((ref) {
