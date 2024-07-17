@@ -45,6 +45,28 @@ class InventoryNotifier extends StateNotifier<List<InventoryModel>> {
     state = inventoryList;
   }
 
+  Future<void> updateInventory(
+      String docId, String inventoryName, int inventoryQuantity) async {
+    await _ref
+        .read(firestoreProvider)
+        .collection('inventory')
+        .doc(docId)
+        .update({
+      'inventoryName': inventoryName,
+      'inventoryQuantity': inventoryQuantity,
+    });
+
+    state = state.map((inventory) {
+      if (inventory.uid == docId) {
+        return inventory.copyWith(
+          inventoryName: inventoryName,
+          inventoryQuantity: inventoryQuantity,
+        );
+      }
+      return inventory;
+    }).toList();
+  }
+
   Future<void> deleteInventory(String docId) async {
     await _ref
         .read(firestoreProvider)

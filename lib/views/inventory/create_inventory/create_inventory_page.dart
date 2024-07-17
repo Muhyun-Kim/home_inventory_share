@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CreateInventoryPage extends ConsumerStatefulWidget {
@@ -38,14 +39,16 @@ class _CreateInventoryPageState extends ConsumerState<CreateInventoryPage> {
               TextFormField(
                 controller: _inventoryController,
                 decoration: InputDecoration(
-                  labelText: 'inventory',
+                  labelText: '品名',
                 ),
               ),
               TextFormField(
                 controller: _quantityController,
                 decoration: InputDecoration(
-                  labelText: 'quantity',
+                  labelText: '個',
                 ),
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               ),
             ],
           ),
