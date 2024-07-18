@@ -7,20 +7,26 @@ class InventoryController {
   InventoryController(this._ref);
 
   Future<void> createInventory(
-      String inventoryName, int inventoryQuantity) async {
+      {required inventoryName, required int inventoryQuantity}) async {
     await _ref
         .read(inventoryProvider.notifier)
         .createInventory(inventoryName, inventoryQuantity);
   }
 
   Future<void> updateInventory(
-      String docId, String inventoryName, int inventoryQuantity) async {
+      {required String docId,
+      required String inventoryName,
+      required int inventoryQuantity}) async {
     await _ref
         .read(inventoryProvider.notifier)
         .updateInventory(docId, inventoryName, inventoryQuantity);
   }
 
-  Future<void> deleteInventory(String docId) async {
+  Future<void> deleteInventory({required String docId}) async {
     await _ref.read(inventoryProvider.notifier).deleteInventory(docId);
   }
 }
+
+final inventoryControllerProvider = Provider((ref) {
+  return InventoryController(ref);
+});
