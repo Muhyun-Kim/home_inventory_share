@@ -5,6 +5,7 @@ import 'package:home_inventory_share/views/create_account/create_account_page.da
 import 'package:home_inventory_share/views/home/home_page.dart';
 import 'package:home_inventory_share/views/inventory/create_inventory/create_inventory_page.dart';
 import 'package:home_inventory_share/views/login/login_page.dart';
+import 'package:home_inventory_share/views/my_profile/my_profile.dart';
 
 final routerProvider = Provider<GoRouter>(
   (ref) {
@@ -35,6 +36,10 @@ final routerProvider = Provider<GoRouter>(
         GoRoute(
           path: '/inventory/create',
           builder: (context, state) => const CreateInventoryPage(),
+        ),
+        GoRoute(
+          path: '/my-profile',
+          builder: (context, state) => const MyProfile(),
         ),
       ],
     );

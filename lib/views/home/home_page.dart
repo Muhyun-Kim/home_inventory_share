@@ -23,9 +23,14 @@ class HomePage extends ConsumerWidget {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            const DrawerHeader(
+            DrawerHeader(
               child: Center(
-                child: Text('Home Inventory'),
+                child: CircleAvatar(
+                  child: IconButton(
+                    icon: Icon(Icons.person),
+                    onPressed: () => context.push('/my-profile'),
+                  ),
+                ),
               ),
             ),
             Column(
@@ -45,7 +50,9 @@ class HomePage extends ConsumerWidget {
         ),
       ),
       body: inventoryList.isEmpty
-          ? Center(child: Text("生活用品を追加しよう"))
+          ? const Center(
+              child: Text("生活用品を追加しよう"),
+            )
           : ListView.builder(
               itemCount: inventoryList.length,
               itemBuilder: (context, index) {
