@@ -8,7 +8,8 @@ class UserModel with _$UserModel {
   const factory UserModel({
     required String username,
     String? detail,
-    required String userId, // user_id에서 userId로 변수명 변경
+    String? profileImg,
+    required String userId,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
