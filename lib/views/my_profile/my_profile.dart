@@ -12,12 +12,26 @@ class MyProfile extends ConsumerWidget {
       appBar: AppBar(
         title: Text(authState.user!.username),
       ),
-      body: Column(
-        children: [
-          Text('profile img'),
-          Text('uid'),
-          Text('toggle button to change qr code screen'),
-        ],
+      body: Center(
+        child: Column(
+          children: [
+            Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 0.1,
+                  )),
+              child: ClipOval(
+                child: Image.asset('images/default_profile.png'),
+              ),
+            ),
+            Text('uid'),
+            Text('toggle button to change qr code screen'),
+          ],
+        ),
       ),
     );
   }
