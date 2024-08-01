@@ -65,6 +65,7 @@ class HomePage extends ConsumerWidget {
                       Text('${inventory.inventoryQuantity}'),
                     ],
                   ),
+                  onTap: () => context.push('/inventory/${index}'),
                 );
               },
             ),

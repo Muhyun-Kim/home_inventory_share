@@ -4,6 +4,7 @@ import 'package:home_inventory_share/providers/auth_provider.dart';
 import 'package:home_inventory_share/views/create_account/create_account_page.dart';
 import 'package:home_inventory_share/views/home/home_page.dart';
 import 'package:home_inventory_share/views/inventory/create_inventory/create_inventory_page.dart';
+import 'package:home_inventory_share/views/inventory/inventory/inventory_page.dart';
 import 'package:home_inventory_share/views/login/login_page.dart';
 import 'package:home_inventory_share/views/my_profile/my_profile.dart';
 
@@ -41,6 +42,13 @@ final routerProvider = Provider<GoRouter>(
           path: '/my-profile',
           builder: (context, state) => const MyProfile(),
         ),
+        GoRoute(
+          path: '/inventory/:id',
+          builder: (context, state) {
+            final id = state.pathParameters['id']!;
+            return InventoryPage(id: id);
+          },
+        )
       ],
     );
   },
