@@ -1,37 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:home_inventory_share/providers/auth_provider.dart';
+import 'package:home_inventory_share/views/my_profile/profile_screen.dart';
+import 'package:home_inventory_share/views/my_profile/qrcode_screen.dart';
 
-class MyProfile extends ConsumerWidget {
+class MyProfile extends ConsumerStatefulWidget {
   const MyProfile({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MyProfile> createState() => _MyProfileState();
+}
+
+class _MyProfileState extends ConsumerState<MyProfile> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  Widget build(BuildContext context) {
     final authState = ref.watch(authStateProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(authState.user!.username),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 0.1,
-                  )),
-              child: ClipOval(
-                child: Image.asset('images/default_profile.png'),
-              ),
-            ),
-            Text('uid'),
-            Text('toggle button to change qr code screen'),
-          ],
-        ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [
+          ProfileScreen(),
+          QrcodeScreen(),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: "プロフィール",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.qr_code),
+            label: "QRコード",
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
     );
   }
