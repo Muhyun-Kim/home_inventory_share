@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:home_inventory_share/providers/auth_provider.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authStateProvider);
     return Center(
       child: Column(
         children: [
@@ -18,11 +21,12 @@ class ProfileScreen extends StatelessWidget {
                   width: 0.1,
                 )),
             child: ClipOval(
-              child: Image.asset('images/default_profile.png'),
+              child: Image.asset(
+                authState.user!.profileImg ?? 'images/default_profile.png',
+              ),
             ),
           ),
-          Text('uid'),
-          Text('toggle button to change qr code screen'),
+          Text(authState.user!.username),
         ],
       ),
     );
