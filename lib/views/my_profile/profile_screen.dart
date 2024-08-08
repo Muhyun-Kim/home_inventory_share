@@ -10,6 +10,7 @@ class ProfileScreen extends ConsumerWidget {
     final authState = ref.watch(authStateProvider);
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             width: 120,
